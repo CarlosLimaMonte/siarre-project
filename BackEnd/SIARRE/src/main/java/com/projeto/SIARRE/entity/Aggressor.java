@@ -8,8 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
@@ -35,5 +37,8 @@ public class Aggressor {
   private Education education;
 
   private Nationality nationality;
+
+  @OneToMany
+  private List<RelationshipVictimAggressor> relationshipVictimAggressorList;
 
 }

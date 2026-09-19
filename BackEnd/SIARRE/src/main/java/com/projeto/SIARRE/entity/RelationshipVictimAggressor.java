@@ -1,9 +1,13 @@
 package com.projeto.SIARRE.entity;
 
+import com.projeto.SIARRE.enumClass.DomesticRelationship;
+import com.projeto.SIARRE.enumClass.FamilyRelationship;
+import com.projeto.SIARRE.enumClass.RomanticRelationship;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,5 +17,17 @@ public class RelationshipVictimAggressor {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @ManyToOne
+  private Victim victim;
+
+  @ManyToOne
+  private Aggressor aggressor;
+
+  private RomanticRelationship romanticRelationship;
+
+  private FamilyRelationship familyRelationship;
+
+  private DomesticRelationship domesticRelationship;
 
 }
