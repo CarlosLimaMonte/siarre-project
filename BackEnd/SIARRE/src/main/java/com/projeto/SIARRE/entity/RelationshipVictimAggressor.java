@@ -5,8 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.LocalDate;
-import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name = "RelationshipVictimAggressor")
@@ -15,16 +13,5 @@ public class RelationshipVictimAggressor {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
-  private String name;
-
-  private String socialName;
-
-  @CPF
-  private String cpf;
-
-  private LocalDate dateOfBirth;
-
-  private
 
 }
