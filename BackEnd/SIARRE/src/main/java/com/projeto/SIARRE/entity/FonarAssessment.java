@@ -44,7 +44,7 @@ public class FonarAssessment {
 
   private LocalDateTime validatedIn;
 
-  @OneToMany(mappedBy = "assessmentFONAR")
+  @OneToMany(mappedBy = "fonarAssessment")
   private List<FonarAnswer> fonarAnswerList;
 
   public FonarAssessment() {
