@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -46,18 +47,17 @@ public class Victim {
   private Nationality nationality;
 
   @OneToMany(mappedBy = "victim")
-  private List<RelationshipVictimAggressor> relationshipVictimAggressorList;
+  private List<RelationshipVictimAggressor> relationshipVictimAggressorList = new ArrayList<>();
 
   @OneToMany(mappedBy = "victim")
-  private List<FonarAssessment> fonarAssessmentList;
+  private List<FonarAssessment> fonarAssessmentList = new ArrayList<>();
 
   public Victim() {
   }
 
   public Victim(Long id, String name, String socialName, String cpf, LocalDate dateOfBirth,
       GenderIdentity genderIdentity, SexualOrientation sexualOrientation, Education education,
-      Nationality nationality, List<RelationshipVictimAggressor> relationshipVictimAggressorList,
-      List<FonarAssessment> fonarAssessmentList) {
+      Nationality nationality) {
     this.id = id;
     this.name = name;
     this.socialName = socialName;
@@ -67,8 +67,6 @@ public class Victim {
     this.sexualOrientation = sexualOrientation;
     this.education = education;
     this.nationality = nationality;
-    this.relationshipVictimAggressorList = relationshipVictimAggressorList;
-    this.fonarAssessmentList = fonarAssessmentList;
   }
 
   public Long getId() {

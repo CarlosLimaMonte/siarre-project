@@ -2,6 +2,7 @@ package com.projeto.SIARRE.entity;
 
 import com.projeto.SIARRE.enumClass.Education;
 import com.projeto.SIARRE.enumClass.GenderIdentity;
+import com.projeto.SIARRE.enumClass.GenderIdentityAggressor;
 import com.projeto.SIARRE.enumClass.Nationality;
 import com.projeto.SIARRE.enumClass.SexualOrientation;
 import jakarta.persistence.Entity;
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,7 +34,7 @@ public class Aggressor {
   private Integer age;
 
   @Enumerated(EnumType.STRING)
-  private GenderIdentity genderIdentity;
+  private GenderIdentityAggressor genderIdentity;
 
   @Enumerated(EnumType.STRING)
   private SexualOrientation sexualOrientation;
@@ -44,13 +46,13 @@ public class Aggressor {
   private Nationality nationality;
 
   @OneToMany(mappedBy = "aggressor")
-  private List<RelationshipVictimAggressor> relationshipVictimAggressorList;
+  private List<RelationshipVictimAggressor> relationshipVictimAggressorList = new ArrayList<>();
 
   public Aggressor() {
   }
 
   public Aggressor(Long id, String name, String socialName, LocalDate dateOfBirth, Integer age,
-      GenderIdentity genderIdentity, SexualOrientation sexualOrientation, Education education,
+      GenderIdentityAggressor genderIdentity, SexualOrientation sexualOrientation, Education education,
       Nationality nationality) {
     this.id = id;
     this.name = name;
@@ -103,11 +105,11 @@ public class Aggressor {
     this.age = age;
   }
 
-  public GenderIdentity getGenderIdentity() {
+  public GenderIdentityAggressor getGenderIdentity() {
     return genderIdentity;
   }
 
-  public void setGenderIdentity(GenderIdentity genderIdentity) {
+  public void setGenderIdentity(GenderIdentityAggressor genderIdentity) {
     this.genderIdentity = genderIdentity;
   }
 
