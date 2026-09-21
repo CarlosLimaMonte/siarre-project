@@ -5,6 +5,8 @@ import com.projeto.SIARRE.enumClass.GenderIdentity;
 import com.projeto.SIARRE.enumClass.Nationality;
 import com.projeto.SIARRE.enumClass.SexualOrientation;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,15 +33,22 @@ public class Victim {
 
   private LocalDate dateOfBirth;
 
+  @Enumerated(EnumType.STRING)
   private GenderIdentity genderIdentity;
 
+  @Enumerated(EnumType.STRING)
   private SexualOrientation sexualOrientation;
 
+  @Enumerated(EnumType.STRING)
   private Education education;
 
+  @Enumerated(EnumType.STRING)
   private Nationality nationality;
 
-  @OneToMany
+  @OneToMany(mappedBy = "victim")
   private List<RelationshipVictimAggressor> relationshipVictimAggressorList;
+
+  @OneToMany(mappedBy = "victim")
+  private List<AssessmentFONAR> assessmentFONARList;
 
 }
