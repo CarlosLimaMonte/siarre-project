@@ -21,4 +21,45 @@ public class FonarOption {
 
   private String value;
 
+  public FonarOption() {
+  }
+
+  public FonarOption(Long id, FonarQuestion question, String label, String value) {
+    this.id = id;
+    this.question = question;
+    this.label = label;
+    this.value = value;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public FonarQuestion getQuestion() {
+    return question;
+  }
+
+  public void setQuestion(FonarQuestion question) {
+    this.question = question;
+  }
+
+  public String getLabel() {
+    return label;
+  }
+
+  public void setLabel(String label) {
+    this.label = label;
+  }
+
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
+  }
 }

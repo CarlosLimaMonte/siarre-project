@@ -21,5 +21,46 @@ public class FonarQuestion {
   @OneToMany(mappedBy = "question")
   private List<FonarOption> optionsList;
 
+  public FonarQuestion() {
+  }
 
+  public FonarQuestion(Long id, String texto, TypeQuestion typeQuestion,
+      List<FonarOption> optionsList) {
+    this.id = id;
+    this.texto = texto;
+    this.typeQuestion = typeQuestion;
+    this.optionsList = optionsList;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getTexto() {
+    return texto;
+  }
+
+  public void setTexto(String texto) {
+    this.texto = texto;
+  }
+
+  public TypeQuestion getTypeQuestion() {
+    return typeQuestion;
+  }
+
+  public void setTypeQuestion(TypeQuestion typeQuestion) {
+    this.typeQuestion = typeQuestion;
+  }
+
+  public List<FonarOption> getOptionsList() {
+    return optionsList;
+  }
+
+  public void setOptionsList(List<FonarOption> optionsList) {
+    this.optionsList = optionsList;
+  }
 }

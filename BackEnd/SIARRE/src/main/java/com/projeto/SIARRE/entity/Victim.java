@@ -51,4 +51,113 @@ public class Victim {
   @OneToMany(mappedBy = "victim")
   private List<FonarAssessment> fonarAssessmentList;
 
+  public Victim() {
+  }
+
+  public Victim(Long id, String name, String socialName, String cpf, LocalDate dateOfBirth,
+      GenderIdentity genderIdentity, SexualOrientation sexualOrientation, Education education,
+      Nationality nationality, List<RelationshipVictimAggressor> relationshipVictimAggressorList,
+      List<FonarAssessment> fonarAssessmentList) {
+    this.id = id;
+    this.name = name;
+    this.socialName = socialName;
+    this.cpf = cpf;
+    this.dateOfBirth = dateOfBirth;
+    this.genderIdentity = genderIdentity;
+    this.sexualOrientation = sexualOrientation;
+    this.education = education;
+    this.nationality = nationality;
+    this.relationshipVictimAggressorList = relationshipVictimAggressorList;
+    this.fonarAssessmentList = fonarAssessmentList;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getSocialName() {
+    return socialName;
+  }
+
+  public void setSocialName(String socialName) {
+    this.socialName = socialName;
+  }
+
+  public String getCpf() {
+    return cpf;
+  }
+
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
+  }
+
+  public LocalDate getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(LocalDate dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  public GenderIdentity getGenderIdentity() {
+    return genderIdentity;
+  }
+
+  public void setGenderIdentity(GenderIdentity genderIdentity) {
+    this.genderIdentity = genderIdentity;
+  }
+
+  public SexualOrientation getSexualOrientation() {
+    return sexualOrientation;
+  }
+
+  public void setSexualOrientation(SexualOrientation sexualOrientation) {
+    this.sexualOrientation = sexualOrientation;
+  }
+
+  public Education getEducation() {
+    return education;
+  }
+
+  public void setEducation(Education education) {
+    this.education = education;
+  }
+
+  public Nationality getNationality() {
+    return nationality;
+  }
+
+  public void setNationality(Nationality nationality) {
+    this.nationality = nationality;
+  }
+
+  public List<RelationshipVictimAggressor> getRelationshipVictimAggressorList() {
+    return relationshipVictimAggressorList;
+  }
+
+  public void setRelationshipVictimAggressorList(
+      List<RelationshipVictimAggressor> relationshipVictimAggressorList) {
+    this.relationshipVictimAggressorList = relationshipVictimAggressorList;
+  }
+
+  public List<FonarAssessment> getFonarAssessmentList() {
+    return fonarAssessmentList;
+  }
+
+  public void setFonarAssessmentList(
+      List<FonarAssessment> fonarAssessmentList) {
+    this.fonarAssessmentList = fonarAssessmentList;
+  }
 }

@@ -33,4 +33,67 @@ public class RelationshipVictimAggressor {
 
   private DomesticRelationship domesticRelationship;
 
+  public RelationshipVictimAggressor() {
+  }
+
+  public RelationshipVictimAggressor(Long id, Victim victim, Aggressor aggressor,
+      RomanticRelationship romanticRelationship, FamilyRelationship familyRelationship,
+      DomesticRelationship domesticRelationship) {
+    this.id = id;
+    this.victim = victim;
+    this.aggressor = aggressor;
+    this.romanticRelationship = romanticRelationship;
+    this.familyRelationship = familyRelationship;
+    this.domesticRelationship = domesticRelationship;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Victim getVictim() {
+    return victim;
+  }
+
+  public void setVictim(Victim victim) {
+    this.victim = victim;
+  }
+
+  public Aggressor getAggressor() {
+    return aggressor;
+  }
+
+  public void setAggressor(Aggressor aggressor) {
+    this.aggressor = aggressor;
+  }
+
+  public RomanticRelationship getRomanticRelationship() {
+    return romanticRelationship;
+  }
+
+  public void setRomanticRelationship(
+      RomanticRelationship romanticRelationship) {
+    this.romanticRelationship = romanticRelationship;
+  }
+
+  public FamilyRelationship getFamilyRelationship() {
+    return familyRelationship;
+  }
+
+  public void setFamilyRelationship(FamilyRelationship familyRelationship) {
+    this.familyRelationship = familyRelationship;
+  }
+
+  public DomesticRelationship getDomesticRelationship() {
+    return domesticRelationship;
+  }
+
+  public void setDomesticRelationship(
+      DomesticRelationship domesticRelationship) {
+    this.domesticRelationship = domesticRelationship;
+  }
 }

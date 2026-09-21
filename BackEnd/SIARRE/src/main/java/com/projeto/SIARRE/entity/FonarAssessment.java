@@ -1,6 +1,7 @@
 package com.projeto.SIARRE.entity;
 
 import com.projeto.SIARRE.enumClass.RiskLevel;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +12,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Table(name = "assessment")
@@ -33,6 +35,7 @@ public class FonarAssessment {
   @JoinColumn(name = "professionalValidatedBy_id")
   private User professionalValidatedBy;
 
+  @CreatedDate
   private LocalDateTime createdDate;
 
   private RiskLevel suggestedRiskLevel;
@@ -44,4 +47,101 @@ public class FonarAssessment {
   @OneToMany(mappedBy = "assessmentFONAR")
   private List<FonarAnswer> fonarAnswerList;
 
+  public FonarAssessment() {
+  }
+
+  public FonarAssessment(Long id, Victim victim, Aggressor aggressor, Integer score,
+      User professionalValidatedBy, LocalDateTime createdDate, RiskLevel suggestedRiskLevel,
+      RiskLevel validatedRiskLevel, LocalDateTime validatedIn, List<FonarAnswer> fonarAnswerList) {
+    this.id = id;
+    this.victim = victim;
+    this.aggressor = aggressor;
+    this.score = score;
+    this.professionalValidatedBy = professionalValidatedBy;
+    this.createdDate = createdDate;
+    this.suggestedRiskLevel = suggestedRiskLevel;
+    this.validatedRiskLevel = validatedRiskLevel;
+    this.validatedIn = validatedIn;
+    this.fonarAnswerList = fonarAnswerList;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Victim getVictim() {
+    return victim;
+  }
+
+  public void setVictim(Victim victim) {
+    this.victim = victim;
+  }
+
+  public Aggressor getAggressor() {
+    return aggressor;
+  }
+
+  public void setAggressor(Aggressor aggressor) {
+    this.aggressor = aggressor;
+  }
+
+  public Integer getScore() {
+    return score;
+  }
+
+  public void setScore(Integer score) {
+    this.score = score;
+  }
+
+  public User getProfessionalValidatedBy() {
+    return professionalValidatedBy;
+  }
+
+  public void setProfessionalValidatedBy(User professionalValidatedBy) {
+    this.professionalValidatedBy = professionalValidatedBy;
+  }
+
+  public LocalDateTime getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(LocalDateTime createdDate) {
+    this.createdDate = createdDate;
+  }
+
+  public RiskLevel getSuggestedRiskLevel() {
+    return suggestedRiskLevel;
+  }
+
+  public void setSuggestedRiskLevel(RiskLevel suggestedRiskLevel) {
+    this.suggestedRiskLevel = suggestedRiskLevel;
+  }
+
+  public RiskLevel getValidatedRiskLevel() {
+    return validatedRiskLevel;
+  }
+
+  public void setValidatedRiskLevel(RiskLevel validatedRiskLevel) {
+    this.validatedRiskLevel = validatedRiskLevel;
+  }
+
+  public LocalDateTime getValidatedIn() {
+    return validatedIn;
+  }
+
+  public void setValidatedIn(LocalDateTime validatedIn) {
+    this.validatedIn = validatedIn;
+  }
+
+  public List<FonarAnswer> getFonarAnswerList() {
+    return fonarAnswerList;
+  }
+
+  public void setFonarAnswerList(List<FonarAnswer> fonarAnswerList) {
+    this.fonarAnswerList = fonarAnswerList;
+  }
 }

@@ -29,4 +29,46 @@ public class FonarAnswer {
   @JoinColumn(name = "option_id")
   private FonarOption fonarOption;
 
+  public FonarAnswer() {
+  }
+
+  public FonarAnswer(Long id, FonarQuestion question, FonarAssessment fonarAssessment,
+      FonarOption fonarOption) {
+    this.id = id;
+    this.question = question;
+    this.fonarAssessment = fonarAssessment;
+    this.fonarOption = fonarOption;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public FonarQuestion getQuestion() {
+    return question;
+  }
+
+  public void setQuestion(FonarQuestion question) {
+    this.question = question;
+  }
+
+  public FonarAssessment getFonarAssessment() {
+    return fonarAssessment;
+  }
+
+  public void setFonarAssessment(FonarAssessment fonarAssessment) {
+    this.fonarAssessment = fonarAssessment;
+  }
+
+  public FonarOption getFonarOption() {
+    return fonarOption;
+  }
+
+  public void setFonarOption(FonarOption fonarOption) {
+    this.fonarOption = fonarOption;
+  }
 }

@@ -46,4 +46,101 @@ public class Aggressor {
   @OneToMany(mappedBy = "aggressor")
   private List<RelationshipVictimAggressor> relationshipVictimAggressorList;
 
+  public Aggressor() {
+  }
+
+  public Aggressor(Long id, String name, String socialName, LocalDate dateOfBirth, Integer age,
+      GenderIdentity genderIdentity, SexualOrientation sexualOrientation, Education education,
+      Nationality nationality) {
+    this.id = id;
+    this.name = name;
+    this.socialName = socialName;
+    this.dateOfBirth = dateOfBirth;
+    this.age = age;
+    this.genderIdentity = genderIdentity;
+    this.sexualOrientation = sexualOrientation;
+    this.education = education;
+    this.nationality = nationality;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getSocialName() {
+    return socialName;
+  }
+
+  public void setSocialName(String socialName) {
+    this.socialName = socialName;
+  }
+
+  public LocalDate getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(LocalDate dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  public Integer getAge() {
+    return age;
+  }
+
+  public void setAge(Integer age) {
+    this.age = age;
+  }
+
+  public GenderIdentity getGenderIdentity() {
+    return genderIdentity;
+  }
+
+  public void setGenderIdentity(GenderIdentity genderIdentity) {
+    this.genderIdentity = genderIdentity;
+  }
+
+  public SexualOrientation getSexualOrientation() {
+    return sexualOrientation;
+  }
+
+  public void setSexualOrientation(SexualOrientation sexualOrientation) {
+    this.sexualOrientation = sexualOrientation;
+  }
+
+  public Education getEducation() {
+    return education;
+  }
+
+  public void setEducation(Education education) {
+    this.education = education;
+  }
+
+  public Nationality getNationality() {
+    return nationality;
+  }
+
+  public void setNationality(Nationality nationality) {
+    this.nationality = nationality;
+  }
+
+  public List<RelationshipVictimAggressor> getRelationshipVictimAggressorList() {
+    return relationshipVictimAggressorList;
+  }
+
+  public void setRelationshipVictimAggressorList(
+      List<RelationshipVictimAggressor> relationshipVictimAggressorList) {
+    this.relationshipVictimAggressorList = relationshipVictimAggressorList;
+  }
 }
