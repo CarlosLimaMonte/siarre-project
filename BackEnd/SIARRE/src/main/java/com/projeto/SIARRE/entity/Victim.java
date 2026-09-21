@@ -49,6 +49,6 @@ public class Victim {
   private List<RelationshipVictimAggressor> relationshipVictimAggressorList;
 
   @OneToMany(mappedBy = "victim")
-  private List<AssessmentFONAR> assessmentFONARList;
+  private List<FonarAssessment> fonarAssessmentList;
 
 }

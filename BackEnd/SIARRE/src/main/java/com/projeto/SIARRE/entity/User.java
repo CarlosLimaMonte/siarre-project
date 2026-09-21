@@ -28,7 +28,7 @@ public class User implements UserDetails {
   private UserRoles role;
 
   @OneToMany(mappedBy = "professionalValidatedBy")
-  private List<AssessmentFONAR> assessmentFONARList;
+  private List<FonarAssessment> fonarAssessmentList;
 
   @JoinColumn(unique = true)
   private String email;

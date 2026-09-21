@@ -7,12 +7,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "assessment")
-public class AssessmentFONAR {
+public class FonarAssessment {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -38,5 +40,8 @@ public class AssessmentFONAR {
   private RiskLevel validatedRiskLevel;
 
   private LocalDateTime validatedIn;
+
+  @OneToMany(mappedBy = "assessmentFONAR")
+  private List<FonarAnswer> fonarAnswerList;
 
 }
