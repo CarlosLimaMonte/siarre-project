@@ -81,7 +81,6 @@ public class VictimService {
     return victimRepository.findByNameContainingIgnoreCase(name.toLowerCase()).stream().map(VictimResponseDto :: fromEntity).toList();
   }
 
-
 }
 
 
