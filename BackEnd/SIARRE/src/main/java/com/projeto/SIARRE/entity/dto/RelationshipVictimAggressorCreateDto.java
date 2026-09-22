@@ -7,7 +7,7 @@ import com.projeto.SIARRE.enumClass.DomesticRelationship;
 import com.projeto.SIARRE.enumClass.FamilyRelationship;
 import com.projeto.SIARRE.enumClass.RomanticRelationship;
 
-public record RelationshipVictimAggressorCeateDto(
+public record RelationshipVictimAggressorCreateDto(
     Long victimId,
     Long aggressorId,
     RomanticRelationship romanticRelationship,
