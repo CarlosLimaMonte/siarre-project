@@ -4,6 +4,8 @@ import com.projeto.SIARRE.enumClass.DomesticRelationship;
 import com.projeto.SIARRE.enumClass.FamilyRelationship;
 import com.projeto.SIARRE.enumClass.RomanticRelationship;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,10 +29,11 @@ public class RelationshipVictimAggressor {
   @JoinColumn(name = "aggressor_id")
   private Aggressor aggressor;
 
+  @Enumerated(EnumType.STRING)
   private RomanticRelationship romanticRelationship;
-
+  @Enumerated(EnumType.STRING)
   private FamilyRelationship familyRelationship;
-
+  @Enumerated(EnumType.STRING)
   private DomesticRelationship domesticRelationship;
 
   public RelationshipVictimAggressor() {

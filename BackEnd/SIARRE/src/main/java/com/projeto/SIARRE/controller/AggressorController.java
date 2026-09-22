@@ -52,7 +52,7 @@ public class AggressorController {
   // Update - By Id
 
   @PutMapping("/{id}")
-  public AggressorResponseDto updateAggressorById(@PathVariable Long id, AggressorCreateDto aggressorCreateDto){
+  public AggressorResponseDto updateAggressorById(@PathVariable Long id, @RequestBody AggressorCreateDto aggressorCreateDto){
     return aggressorService.updateAggressorById(id, aggressorCreateDto);
   }
 

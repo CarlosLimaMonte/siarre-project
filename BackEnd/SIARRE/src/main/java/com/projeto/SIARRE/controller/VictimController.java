@@ -62,7 +62,7 @@ public class VictimController {
   // Update - By Id
 
   @PutMapping("/{id}")
-  public VictimResponseDto updateVictimById(@PathVariable Long id, VictimCreateDto victimCreateDto){
+  public VictimResponseDto updateVictimById(@PathVariable Long id, @RequestBody VictimCreateDto victimCreateDto){
     return victimService.updateVictimById(id, victimCreateDto);
   }
 
