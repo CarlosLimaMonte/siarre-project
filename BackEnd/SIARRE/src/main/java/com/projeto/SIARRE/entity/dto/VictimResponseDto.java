@@ -20,7 +20,6 @@ public record VictimResponseDto (
     SexualOrientation sexualOrientation,
     Education education,
     Nationality nationality,
-    // Need to create a DTO for RelationshipVictimAggressor entity.
     List<RelationshipVictimAggressorDto> relationshipVictimAggressors,
     // Need to create a DTO for FonarAssessment entity.
     List<FonarAssessmentDto> fonarAssessmentList
@@ -37,7 +36,7 @@ public record VictimResponseDto (
         victim.getEducation(),
         victim.getNationality(),
         victim.getRelationshipVictimAggressorList() != null ?
-          victim.getRelationshipVictimAggressorList().stream().map(RelationshipVictimAggressorResponseDto :: fromEntity).toList() : List.of(),
+          victim.getRelationshipVictimAggressorList().stream().map(RelationshipVictimAggressorDto ::fromEntity).toList() : List.of(),
         victim.getFonarAssessmentList() != null ?
             victim.getFonarAssessmentList().stream().map(FonarAssessmentResponseDto :: fromEntity).toList() : List.of()
     );
