@@ -106,7 +106,7 @@ public class FonarQuestionService {
 
     FonarQuestion fonarQuestion = findFonarQuestionById(id);
 
-    fonarOptionRepository.deleteById(id);
+    fonarQuestionRepository.deleteById(id);
   }
 
 

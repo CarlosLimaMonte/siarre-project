@@ -90,6 +90,10 @@ public class RelationshipVictimAggressorService {
         AggressorNotFoundException::new
     );
 
+    if (relationshipRepository.existsByVictimIdAndAggressorId(victim.getId(), aggressor.getId())){
+      throw new RelationshipAlreadyExistsException();
+    }
+
     relationshipFromDb.setVictim(victim);
     relationshipFromDb.setAggressor(aggressor);
     relationshipFromDb.setRomanticRelationship(relationshipCreateDto.romanticRelationship());

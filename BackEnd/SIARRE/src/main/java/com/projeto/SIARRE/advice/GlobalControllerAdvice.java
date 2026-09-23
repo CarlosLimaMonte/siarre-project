@@ -1,5 +1,6 @@
 package com.projeto.SIARRE.advice;
 
+import com.projeto.SIARRE.exception.ConflictException;
 import com.projeto.SIARRE.exception.NotFoundException;
 import com.projeto.SIARRE.exception.RelationshipAlreadyExistsException;
 import com.projeto.SIARRE.exception.RestErrorClass;
@@ -17,10 +18,10 @@ public class GlobalControllerAdvice {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(restErrorClass);
   }
 
-  @ExceptionHandler(RelationshipAlreadyExistsException.class)
-  public ResponseEntity<RestErrorClass> RelationshipAlreadyExistsException(RelationshipAlreadyExistsException exception){
-    RestErrorClass restErrorClass = new RestErrorClass(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(restErrorClass);
+  @ExceptionHandler(ConflictException.class)
+  public ResponseEntity<RestErrorClass> RelationshipAlreadyExistsException(ConflictException exception){
+    RestErrorClass restErrorClass = new RestErrorClass(HttpStatus.CONFLICT, exception.getMessage());
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(restErrorClass);
   }
 
 
