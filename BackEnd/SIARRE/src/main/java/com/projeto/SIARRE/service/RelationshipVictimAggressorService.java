@@ -6,6 +6,7 @@ import com.projeto.SIARRE.entity.Victim;
 import com.projeto.SIARRE.entity.dto.RelationshipVictimAggressorCreateDto;
 import com.projeto.SIARRE.entity.dto.RelationshipVictimAggressorDto;
 import com.projeto.SIARRE.exception.AggressorNotFoundException;
+import com.projeto.SIARRE.exception.RelationshipAlreadyExistsException;
 import com.projeto.SIARRE.exception.RelationshipVictimAggressorNotFoundException;
 import com.projeto.SIARRE.exception.VictimNotFoundException;
 import com.projeto.SIARRE.repository.AggressorRepository;
@@ -33,6 +34,7 @@ public class RelationshipVictimAggressorService {
 
   public RelationshipVictimAggressorDto createRelationship(RelationshipVictimAggressorCreateDto relationshipCreateDto){
 
+
     Victim victim = victimRepository.findById(relationshipCreateDto.victimId()).orElseThrow(
         VictimNotFoundException::new
     );
@@ -40,6 +42,10 @@ public class RelationshipVictimAggressorService {
     Aggressor aggressor = aggressorRepository.findById(relationshipCreateDto.aggressorId()).orElseThrow(
         AggressorNotFoundException::new
     );
+
+    if (relationshipRepository.existsByVictimIdAndAggressorId(victim.getId(), aggressor.getId())){
+      throw new RelationshipAlreadyExistsException();
+    }
 
     return RelationshipVictimAggressorDto.fromEntity(relationshipRepository.save(relationshipCreateDto.toEntity(victim, aggressor)));
   }
