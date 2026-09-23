@@ -2,6 +2,8 @@ package com.projeto.SIARRE.entity;
 
 import com.projeto.SIARRE.enumClass.RiskLevel;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,8 +39,10 @@ public class FonarAssessment {
   @CreatedDate
   private LocalDateTime createdDate;
 
+  @Enumerated(EnumType.STRING)
   private RiskLevel suggestedRiskLevel;
 
+  @Enumerated(EnumType.STRING)
   private RiskLevel validatedRiskLevel;
 
   private LocalDateTime validatedIn;

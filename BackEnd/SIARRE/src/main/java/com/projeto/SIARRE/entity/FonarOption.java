@@ -21,14 +21,17 @@ public class FonarOption {
 
   private String value;
 
+  private Integer score;
+
   public FonarOption() {
   }
 
-  public FonarOption(Long id, FonarQuestion question, String label, String value) {
+  public FonarOption(Long id, FonarQuestion question, String label, String value, Integer score) {
     this.id = id;
     this.question = question;
     this.label = label;
     this.value = value;
+    this.score = score;
   }
 
   public Long getId() {
@@ -61,5 +64,13 @@ public class FonarOption {
 
   public void setValue(String value) {
     this.value = value;
+  }
+
+  public Integer getScore() {
+    return score;
+  }
+
+  public void setScore(Integer score) {
+    this.score = score;
   }
 }

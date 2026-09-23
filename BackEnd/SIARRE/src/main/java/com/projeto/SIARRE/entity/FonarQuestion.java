@@ -2,6 +2,8 @@ package com.projeto.SIARRE.entity;
 
 import com.projeto.SIARRE.enumClass.TypeQuestion;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -16,20 +18,24 @@ public class FonarQuestion {
 
   private String texto;
 
+  @Enumerated(EnumType.STRING)
   private TypeQuestion typeQuestion;
 
   @OneToMany(mappedBy = "question")
   private List<FonarOption> optionsList;
 
+  private Boolean required;
+
   public FonarQuestion() {
   }
 
   public FonarQuestion(Long id, String texto, TypeQuestion typeQuestion,
-      List<FonarOption> optionsList) {
+      List<FonarOption> optionsList, Boolean required) {
     this.id = id;
     this.texto = texto;
     this.typeQuestion = typeQuestion;
     this.optionsList = optionsList;
+    this.required = required;
   }
 
   public Long getId() {
@@ -62,5 +68,13 @@ public class FonarQuestion {
 
   public void setOptionsList(List<FonarOption> optionsList) {
     this.optionsList = optionsList;
+  }
+
+  public Boolean getRequired() {
+    return required;
+  }
+
+  public void setRequired(Boolean required) {
+    this.required = required;
   }
 }
