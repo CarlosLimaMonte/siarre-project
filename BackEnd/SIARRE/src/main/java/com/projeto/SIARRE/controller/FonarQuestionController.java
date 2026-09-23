@@ -1,7 +1,6 @@
 package com.projeto.SIARRE.controller;
 
 
-import com.projeto.SIARRE.entity.FonarQuestion;
 import com.projeto.SIARRE.entity.dto.FonarQuestionCreateDto;
 import com.projeto.SIARRE.entity.dto.FonarQuestionDto;
 import com.projeto.SIARRE.service.FonarQuestionService;
@@ -56,7 +55,7 @@ public class FonarQuestionController {
   // Update - By Id
 
   @PutMapping("/{id}")
-  public FonarQuestionDto uptadeFonarQuestionById(@PathVariable Long id, @Valid FonarQuestionCreateDto fonarQuestionCreateDto){
+  public FonarQuestionDto uptadeFonarQuestionById(@PathVariable Long id, @Valid @RequestBody FonarQuestionCreateDto fonarQuestionCreateDto){
     return fonarQuestionService.updateFonarQuestion(id, fonarQuestionCreateDto);
   }
 
