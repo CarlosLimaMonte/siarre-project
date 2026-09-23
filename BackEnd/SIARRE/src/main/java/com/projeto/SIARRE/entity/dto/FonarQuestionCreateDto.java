@@ -5,7 +5,6 @@ import com.projeto.SIARRE.entity.FonarQuestion;
 import com.projeto.SIARRE.enumClass.TypeQuestion;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 public record FonarQuestionCreateDto(
@@ -14,7 +13,8 @@ public record FonarQuestionCreateDto(
     String texto,
     @NotBlank(message = "O tipo de questão precisa ser preenchido!")
     TypeQuestion typeQuestion,
-    List<Long> optionIds,
+    @NotBlank(message = "As opções da questão precisa estar preenchido!")
+    List<FonarOptionCreateDto> optionIds,
     Boolean required
 ) {
 

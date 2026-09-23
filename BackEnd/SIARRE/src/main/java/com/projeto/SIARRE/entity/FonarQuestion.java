@@ -1,6 +1,7 @@
 package com.projeto.SIARRE.entity;
 
 import com.projeto.SIARRE.enumClass.TypeQuestion;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,7 +22,7 @@ public class FonarQuestion {
   @Enumerated(EnumType.STRING)
   private TypeQuestion typeQuestion;
 
-  @OneToMany(mappedBy = "question")
+  @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
   private List<FonarOption> optionsList;
 
   private Boolean required;
