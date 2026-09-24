@@ -10,6 +10,7 @@ import com.projeto.SIARRE.entity.dto.FonarAssessmentCreateDto;
 import com.projeto.SIARRE.entity.dto.FonarAssessmentDto;
 import com.projeto.SIARRE.exception.AggressorNotFoundException;
 import com.projeto.SIARRE.exception.FonarAssessmentNotFoundException;
+import com.projeto.SIARRE.exception.NoAnswerWasFilledException;
 import com.projeto.SIARRE.exception.VictimNotFoundException;
 import com.projeto.SIARRE.repository.AggressorRepository;
 import com.projeto.SIARRE.repository.FonarAssessmentRepository;
@@ -125,6 +126,20 @@ public class FonarAssessmentService {
 
     return FonarAnswerDto.fromEntity(answer);
 
+  }
+
+  // Calculate the total score of assessment
+
+  public Integer calculateTotalScore(Long id){
+
+    FonarAssessment assessment = findById(id);
+
+    if (assessment.getFonarAnswerList() == null){
+      throw new NoAnswerWasFilledException("Nenhum resposta foi preenchida!");
+    }
+
+    return assessment.getFonarAnswerList().stream().filter(answer -> answer.getFonarOption() != null).mapToInt(answer -> answer.getFonarOption().getScore()
+    ).sum();
   }
 
 }
