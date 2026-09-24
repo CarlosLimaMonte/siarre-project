@@ -39,7 +39,7 @@ public class FonarAnswerService {
 
   // Create
 
-  public FonarAnswerDto fonarAnswerDto(FonarAnswerCreateDto fonarAnswerCreateDto){
+  public FonarAnswerDto createFonarAnswer(FonarAnswerCreateDto fonarAnswerCreateDto){
 
     FonarQuestion question = fonarQuestionRepository.findById(fonarAnswerCreateDto.questionId()).orElseThrow(
         FonarQuestionNotFoundException :: new

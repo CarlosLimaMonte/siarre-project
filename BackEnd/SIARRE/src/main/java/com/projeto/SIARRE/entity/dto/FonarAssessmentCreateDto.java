@@ -13,15 +13,13 @@ public record FonarAssessmentCreateDto(
     @NotNull(message = "A vítima precisa ser preenchido!")
     Long victimId,
     @NotNull(message = "O agressor precisa ser preenchido!")
-    Long aggressorId,
-    @NotEmpty(message = "As respostas precisam estar preenchidas!")
-    List<@Valid FonarAnswerCreateDto> answerCreateDtoList
+    Long aggressorId
 ) {
 
-  public FonarAssessment toEntity(Victim victim, Aggressor aggressor, List<FonarAnswer> fonarAnswerList){
+  public FonarAssessment toEntity(Victim victim, Aggressor aggressor){
 
     return new FonarAssessment(
-        null, victim, aggressor, 0, null, null, null, null, fonarAnswerList
+        null, victim, aggressor, 0, null, null, null, null, null
     );
 
   }
