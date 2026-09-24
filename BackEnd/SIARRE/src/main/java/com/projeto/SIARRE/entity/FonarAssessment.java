@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -49,14 +50,14 @@ public class FonarAssessment {
   private LocalDateTime validatedIn;
 
   @OneToMany(mappedBy = "fonarAssessment")
-  private List<FonarAnswer> fonarAnswerList;
+  private List<FonarAnswer> fonarAnswerList = new ArrayList<>();
 
   public FonarAssessment() {
   }
 
   public FonarAssessment(Long id, Victim victim, Aggressor aggressor, Integer score,
       User professionalValidatedBy, RiskLevel suggestedRiskLevel,
-      RiskLevel validatedRiskLevel, LocalDateTime validatedIn, List<FonarAnswer> fonarAnswerList) {
+      RiskLevel validatedRiskLevel, LocalDateTime validatedIn) {
     this.id = id;
     this.victim = victim;
     this.aggressor = aggressor;
@@ -65,7 +66,6 @@ public class FonarAssessment {
     this.suggestedRiskLevel = suggestedRiskLevel;
     this.validatedRiskLevel = validatedRiskLevel;
     this.validatedIn = validatedIn;
-    this.fonarAnswerList = fonarAnswerList;
   }
 
   public Long getId() {

@@ -1,8 +1,11 @@
 package com.projeto.SIARRE.controller;
 
+import com.projeto.SIARRE.entity.dto.FonarAnswerCreateDto;
+import com.projeto.SIARRE.entity.dto.FonarAnswerDto;
 import com.projeto.SIARRE.entity.dto.FonarAssessmentCreateDto;
 import com.projeto.SIARRE.entity.dto.FonarAssessmentDto;
 import com.projeto.SIARRE.service.FonarAssessmentService;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +32,7 @@ public class FonarAssessmentController {
 
   @PostMapping
   public ResponseEntity<FonarAssessmentDto> createFonarAssessment(@RequestBody
-      FonarAssessmentCreateDto assessmentCreateDto){
+      @Valid FonarAssessmentCreateDto assessmentCreateDto){
 
     FonarAssessmentDto assessmentDto = fonarAssessmentService.createFonarAssessment(assessmentCreateDto);
 
@@ -52,14 +55,14 @@ public class FonarAssessmentController {
 
   // Read - By Victim Id
 
-  @GetMapping("/victim/{id}")
+  @GetMapping("/victim/{victimId}")
   public List<FonarAssessmentDto> getFonarAssessmentByVictimId(@PathVariable Long victimId){
     return fonarAssessmentService.findByVictimId(victimId);
   }
 
   // Read - By Aggressor Id
 
-  @GetMapping("/aggressor/{id}")
+  @GetMapping("/aggressor/{aggressorId}")
   public List<FonarAssessmentDto> getFonarAssessmentByAggressorId(@PathVariable Long aggressorId){
     return fonarAssessmentService.findByAggressorId(aggressorId);
   }
@@ -78,6 +81,20 @@ public class FonarAssessmentController {
     fonarAssessmentService.deleteById(id);
 
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  }
+
+  // Add a new answer to assessment
+
+  @PostMapping("/{assessmentId}/answers")
+  public ResponseEntity<FonarAnswerDto> addAnswer(
+      @PathVariable Long assessmentId,
+      @Valid @RequestBody FonarAnswerCreateDto dto) {
+
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(
+            fonarAssessmentService
+                .receiveAndAddAnswer(assessmentId, dto)
+        );
   }
 
 }
