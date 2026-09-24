@@ -21,7 +21,7 @@ public record FonarAssessmentCreateDto(
   public FonarAssessment toEntity(Victim victim, Aggressor aggressor, List<FonarAnswer> fonarAnswerList){
 
     return new FonarAssessment(
-        null, victim, aggressor, 0, null, 0, 0, null, fonarAnswerList
+        null, victim, aggressor, 0, null, null, null, null, fonarAnswerList
     );
 
   }
