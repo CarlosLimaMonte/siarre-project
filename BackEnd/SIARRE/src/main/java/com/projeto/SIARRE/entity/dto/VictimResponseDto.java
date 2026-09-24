@@ -38,7 +38,7 @@ public record VictimResponseDto (
         victim.getRelationshipVictimAggressorList() != null ?
           victim.getRelationshipVictimAggressorList().stream().map(RelationshipVictimAggressorDto ::fromEntity).toList() : List.of(),
         victim.getFonarAssessmentList() != null ?
-            victim.getFonarAssessmentList().stream().map(FonarAssessmentResponseDto :: fromEntity).toList() : List.of()
+            victim.getFonarAssessmentList().stream().map(FonarAssessmentDto :: fromEntity).toList() : List.of()
     );
   }
 
