@@ -9,7 +9,7 @@ public record FonarAnswerDto(
     Long optionId
 ) {
 
-  public FonarAnswerDto fromEntity(FonarAnswer entity){
+  public static FonarAnswerDto fromEntity(FonarAnswer entity){
     return new FonarAnswerDto(
         entity.getId(),
         entity.getQuestion().getId(),
