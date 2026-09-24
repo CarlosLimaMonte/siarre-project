@@ -13,6 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
@@ -36,7 +37,7 @@ public class FonarAssessment {
   @JoinColumn(name = "professionalValidatedBy_id")
   private User professionalValidatedBy;
 
-  @CreatedDate
+  @CreationTimestamp
   private LocalDateTime createdDate;
 
   @Enumerated(EnumType.STRING)
@@ -54,14 +55,13 @@ public class FonarAssessment {
   }
 
   public FonarAssessment(Long id, Victim victim, Aggressor aggressor, Integer score,
-      User professionalValidatedBy, LocalDateTime createdDate, RiskLevel suggestedRiskLevel,
+      User professionalValidatedBy, RiskLevel suggestedRiskLevel,
       RiskLevel validatedRiskLevel, LocalDateTime validatedIn, List<FonarAnswer> fonarAnswerList) {
     this.id = id;
     this.victim = victim;
     this.aggressor = aggressor;
     this.score = score;
     this.professionalValidatedBy = professionalValidatedBy;
-    this.createdDate = createdDate;
     this.suggestedRiskLevel = suggestedRiskLevel;
     this.validatedRiskLevel = validatedRiskLevel;
     this.validatedIn = validatedIn;
