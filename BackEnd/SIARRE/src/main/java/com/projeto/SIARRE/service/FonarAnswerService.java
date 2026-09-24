@@ -39,14 +39,10 @@ public class FonarAnswerService {
 
   // Create
 
-  public FonarAnswerDto createFonarAnswer(FonarAnswerCreateDto fonarAnswerCreateDto){
+  public FonarAnswer createFonarAnswer(FonarAssessment assessment  ,FonarAnswerCreateDto fonarAnswerCreateDto){
 
     FonarQuestion question = fonarQuestionRepository.findById(fonarAnswerCreateDto.questionId()).orElseThrow(
         FonarQuestionNotFoundException :: new
-    );
-
-    FonarAssessment assessment = fonarAssessmentRepository.findById(fonarAnswerCreateDto.assessmentId()).orElseThrow(
-        FonarAssessmentNotFoundException :: new
     );
 
     FonarOption option = fonarOptionRepository.findById(fonarAnswerCreateDto.optionId()).orElseThrow(
@@ -54,7 +50,7 @@ public class FonarAnswerService {
     );
 
     if(question.equals(option.getQuestion())){
-      return FonarAnswerDto.fromEntity(fonarAnswerRepository.save(fonarAnswerCreateDto.toEntity(question, assessment ,option)));
+      return fonarAnswerRepository.save(fonarAnswerCreateDto.toEntity(question, assessment ,option));
     }
 
     throw new OptionDoesntBelongThisQuestionException();
@@ -81,16 +77,12 @@ public class FonarAnswerService {
 
   // Update - By Id
 
-  public FonarAnswerDto updateFonarAnswer(Long id, FonarAnswerCreateDto fonarAnswerCreateDto){
+  public FonarAnswerDto updateFonarAnswer(Long id, FonarAssessment assessment ,FonarAnswerCreateDto fonarAnswerCreateDto){
 
     FonarAnswer answerFromDb = findFonarAnswerById(id);
 
     FonarQuestion question = fonarQuestionRepository.findById(fonarAnswerCreateDto.questionId()).orElseThrow(
         FonarQuestionNotFoundException :: new
-    );
-
-    FonarAssessment assessment = fonarAssessmentRepository.findById(fonarAnswerCreateDto.assessmentId()).orElseThrow(
-        FonarAssessmentNotFoundException :: new
     );
 
     FonarOption option = fonarOptionRepository.findById(fonarAnswerCreateDto.optionId()).orElseThrow(

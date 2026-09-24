@@ -1,8 +1,11 @@
 package com.projeto.SIARRE.service;
 
 import com.projeto.SIARRE.entity.Aggressor;
+import com.projeto.SIARRE.entity.FonarAnswer;
 import com.projeto.SIARRE.entity.FonarAssessment;
 import com.projeto.SIARRE.entity.Victim;
+import com.projeto.SIARRE.entity.dto.FonarAnswerCreateDto;
+import com.projeto.SIARRE.entity.dto.FonarAnswerDto;
 import com.projeto.SIARRE.entity.dto.FonarAssessmentCreateDto;
 import com.projeto.SIARRE.entity.dto.FonarAssessmentDto;
 import com.projeto.SIARRE.exception.AggressorNotFoundException;
@@ -18,12 +21,15 @@ import org.springframework.stereotype.Service;
 public class FonarAssessmentService {
 
   private final FonarAssessmentRepository fonarAssessmentRepository;
+  private final FonarAnswerService fonarAnswerService;
   private final VictimRepository victimRepository;
   private final AggressorRepository aggressorRepository;
 
   public FonarAssessmentService(FonarAssessmentRepository fonarAssessmentRepository,
+      FonarAnswerService fonarAnswerService,
       VictimRepository victimRepository, AggressorRepository aggressorRepository) {
     this.fonarAssessmentRepository = fonarAssessmentRepository;
+    this.fonarAnswerService = fonarAnswerService;
     this.victimRepository = victimRepository;
     this.aggressorRepository = aggressorRepository;
   }
@@ -107,5 +113,18 @@ public class FonarAssessmentService {
 
   }
 
+  // Receive answer
+
+  public FonarAnswerDto receiveAndAddAnswer(Long assessmentId, FonarAnswerCreateDto answerCreateDto){
+
+    FonarAssessment assessment = findById(assessmentId);
+
+    FonarAnswer answer = fonarAnswerService.createFonarAnswer(assessment, answerCreateDto);
+
+    assessment.getFonarAnswerList().add(answer);
+
+    return FonarAnswerDto.fromEntity(answer);
+
+  }
 
 }

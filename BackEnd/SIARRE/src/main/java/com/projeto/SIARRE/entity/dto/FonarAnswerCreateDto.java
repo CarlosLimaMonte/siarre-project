@@ -9,8 +9,6 @@ import jakarta.validation.constraints.NotNull;
 public record FonarAnswerCreateDto(
     @NotNull(message = "O número da questão não pode estar em branco!")
     Long questionId,
-    @NotNull(message = "O número do formulário não pode estar em branco!")
-    Long assessmentId,
     @NotNull(message = "A opção não pode estar em branco!")
     Long optionId
 ) {
