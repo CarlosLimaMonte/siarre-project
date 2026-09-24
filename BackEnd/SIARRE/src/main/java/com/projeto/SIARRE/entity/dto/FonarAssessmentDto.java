@@ -24,7 +24,7 @@ public record FonarAssessmentDto(
         entity.getVictim().getId(),
         entity.getAggressor().getId(),
         entity.getScore(),
-        entity.getProfessionalValidatedBy().getId(),
+        entity.getProfessionalValidatedBy() != null ? entity.getProfessionalValidatedBy().getId() : null,
         entity.getCreatedDate(),
         entity.getSuggestedRiskLevel(),
         entity.getValidatedRiskLevel(),
