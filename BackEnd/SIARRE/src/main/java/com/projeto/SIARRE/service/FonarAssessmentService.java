@@ -138,8 +138,22 @@ public class FonarAssessmentService {
       throw new NoAnswerWasFilledException("Nenhum resposta foi preenchida!");
     }
 
-    return assessment.getFonarAnswerList().stream().filter(answer -> answer.getFonarOption() != null).mapToInt(answer -> answer.getFonarOption().getScore()
+    Integer total = assessment.getFonarAnswerList().stream().filter(answer -> answer.getFonarOption() != null).mapToInt(answer ->
+    {
+      if (answer.getFonarOption().getCritical()){
+        return answer.getFonarOption().getScore()*2;
+      }
+
+      return answer.getFonarOption().getScore();
+
+    }
     ).sum();
+
+    assessment.setScore(total);
+
+    fonarAssessmentRepository.save(assessment);
+
+    return total;
   }
 
 }

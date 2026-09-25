@@ -23,15 +23,18 @@ public class FonarOption {
 
   private Integer score;
 
+  private Boolean critical;
+
   public FonarOption() {
   }
 
-  public FonarOption(Long id, FonarQuestion question, String label, String value, Integer score) {
+  public FonarOption(Long id, FonarQuestion question, String label, String value, Integer score, Boolean critical) {
     this.id = id;
     this.question = question;
     this.label = label;
     this.value = value;
     this.score = score;
+    this.critical = critical;
   }
 
   public Long getId() {
@@ -72,5 +75,13 @@ public class FonarOption {
 
   public void setScore(Integer score) {
     this.score = score;
+  }
+
+  public Boolean getCritical() {
+    return critical;
+  }
+
+  public void setCritical(Boolean critical) {
+    this.critical = critical;
   }
 }
