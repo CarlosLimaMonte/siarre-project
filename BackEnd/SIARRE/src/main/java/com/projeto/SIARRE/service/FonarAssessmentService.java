@@ -8,9 +8,11 @@ import com.projeto.SIARRE.entity.dto.FonarAnswerCreateDto;
 import com.projeto.SIARRE.entity.dto.FonarAnswerDto;
 import com.projeto.SIARRE.entity.dto.FonarAssessmentCreateDto;
 import com.projeto.SIARRE.entity.dto.FonarAssessmentDto;
+import com.projeto.SIARRE.enumClass.RiskLevel;
 import com.projeto.SIARRE.exception.AggressorNotFoundException;
 import com.projeto.SIARRE.exception.FonarAssessmentNotFoundException;
 import com.projeto.SIARRE.exception.NoAnswerWasFilledException;
+import com.projeto.SIARRE.exception.ScoreIsEmptyException;
 import com.projeto.SIARRE.exception.VictimNotFoundException;
 import com.projeto.SIARRE.repository.AggressorRepository;
 import com.projeto.SIARRE.repository.FonarAssessmentRepository;
@@ -154,6 +156,31 @@ public class FonarAssessmentService {
     fonarAssessmentRepository.save(assessment);
 
     return total;
+  }
+
+  // Define the suggested risk level
+  public RiskLevel calculateRiskLevel(Long id){
+
+    FonarAssessment assessment = findById(id);
+
+    if (assessment.getScore() == null){
+      throw new ScoreIsEmptyException();
+    }
+
+    if (assessment.getScore() > 100){
+      assessment.setSuggestedRiskLevel(RiskLevel.ALTO);
+      fonarAssessmentRepository.save(assessment);
+      return RiskLevel.ALTO;
+    } else if (assessment.getScore() >= 50 ){
+      assessment.setSuggestedRiskLevel(RiskLevel.MEDIO);
+      fonarAssessmentRepository.save(assessment);
+      return RiskLevel.MEDIO;
+    } else {
+      assessment.setSuggestedRiskLevel(RiskLevel.BAIXO);
+      fonarAssessmentRepository.save(assessment);
+      return RiskLevel.BAIXO;
+    }
+
   }
 
 }

@@ -19,7 +19,7 @@ public record FonarAssessmentCreateDto(
   public FonarAssessment toEntity(Victim victim, Aggressor aggressor){
 
     return new FonarAssessment(
-        null, victim, aggressor, 0, null, null, null, null
+        null, victim, aggressor, null, null, null, null, null
     );
 
   }
