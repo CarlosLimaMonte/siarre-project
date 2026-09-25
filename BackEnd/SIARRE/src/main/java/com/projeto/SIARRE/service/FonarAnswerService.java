@@ -72,7 +72,7 @@ public class FonarAnswerService {
   // Read - All Answer By Assement
 
   public List<FonarAnswerDto> findFonarAnswerByAssessment(Long assessmentId){
-     return fonarAnswerRepository.findByAssessment_id(assessmentId).stream().map(FonarAnswerDto :: fromEntity).toList();
+     return fonarAnswerRepository.findByfonarAssessment_id(assessmentId).stream().map(FonarAnswerDto :: fromEntity).toList();
   }
 
   // Update - By Id

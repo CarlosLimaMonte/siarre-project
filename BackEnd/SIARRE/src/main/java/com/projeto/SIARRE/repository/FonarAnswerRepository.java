@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface FonarAnswerRepository extends JpaRepository<FonarAnswer, Long> {
 
 
-  List<FonarAnswer> findByAssessment_id(Long assessmentId);
+  List<FonarAnswer> findByfonarAssessment_id(Long fonarAssessmentId);
 
 }
