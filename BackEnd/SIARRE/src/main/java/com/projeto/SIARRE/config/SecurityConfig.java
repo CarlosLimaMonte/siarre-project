@@ -32,7 +32,7 @@ public class SecurityConfig {
   }
 
   @Bean
-  public AuthenticationProvider authenticationProvider(UserService userService,
+  public DaoAuthenticationProvider authenticationProvider(UserService userService,
       PasswordEncoder passwordEncoder){
 
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userService);
@@ -66,6 +66,7 @@ public class SecurityConfig {
               .authenticated()
             .requestMatchers(HttpMethod.POST, "/assessment", "/assessment/**")
               .authenticated()
+            .anyRequest().authenticated()
         );
 
     return http.build();

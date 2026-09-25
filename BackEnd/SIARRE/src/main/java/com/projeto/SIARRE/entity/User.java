@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.jspecify.annotations.Nullable;
@@ -30,7 +31,7 @@ public class User implements UserDetails {
   private UserRoles role;
 
   @OneToMany(mappedBy = "professionalValidatedBy")
-  private List<FonarAssessment> fonarAssessmentList;
+  private List<FonarAssessment> fonarAssessmentList = new ArrayList<>();
 
   @Column(unique = true, nullable = false)
   private String email;
@@ -40,11 +41,10 @@ public class User implements UserDetails {
   public User() {
   }
 
-  public User(Long id, UserRoles role, List<FonarAssessment> fonarAssessmentList, String email,
+  public User(Long id, UserRoles role, String email,
       String password) {
     this.id = id;
     this.role = role;
-    this.fonarAssessmentList = fonarAssessmentList;
     this.email = email;
     this.password = password;
   }
