@@ -1,6 +1,7 @@
 package com.projeto.SIARRE.entity;
 
 import com.projeto.SIARRE.enumClass.UserRoles;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -31,9 +32,9 @@ public class User implements UserDetails {
   @OneToMany(mappedBy = "professionalValidatedBy")
   private List<FonarAssessment> fonarAssessmentList;
 
-  @JoinColumn(unique = true)
+  @Column(unique = true, nullable = false)
   private String email;
-
+  @Column(nullable = false, length = 255)
   private String password;
 
   public User() {
