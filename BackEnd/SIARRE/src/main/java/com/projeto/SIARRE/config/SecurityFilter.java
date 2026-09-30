@@ -8,6 +8,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -29,10 +33,27 @@ public class SecurityFilter extends OncePerRequestFilter {
     String token = recoverToken(request);
 
     if(token != null){
+      String email = tokenService.validateToken(token);
 
+      if(email != null){
+        UserDetails user = userService.loadUserByUsername(email);
+
+        UsernamePasswordAuthenticationToken authentication = UsernamePasswordAuthenticationToken.authenticated(
+            user,
+            null,
+            user.getAuthorities()
+        );
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+
+        context.setAuthentication(authentication);
+
+        SecurityContextHolder.setContext(context);
+
+      }
     }
 
-
+    filterChain.doFilter(request, response);
 
   }
 
