@@ -1,6 +1,8 @@
 package com.projeto.SIARRE.config;
 
 import com.projeto.SIARRE.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -43,9 +46,24 @@ public class SecurityConfig {
   }
 
   @Bean
+  public FilterRegistrationBean<SecurityFilter> securityFilterRegistration(
+      SecurityFilter securityFilter
+  ) {
+
+    FilterRegistrationBean<SecurityFilter> registration =
+        new FilterRegistrationBean<>(securityFilter);
+
+    registration.setEnabled(false);
+
+    return registration;
+  }
+
+
+  @Bean
   public SecurityFilterChain securityFilterChain(
       HttpSecurity http,
-      DaoAuthenticationProvider authenticationProvider
+      DaoAuthenticationProvider authenticationProvider,
+      SecurityFilter securityFilter
   ){
     http
         .csrf(AbstractHttpConfigurer::disable)
@@ -67,6 +85,30 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.POST, "/assessment", "/assessment/**")
               .authenticated()
             .anyRequest().authenticated()
+        )
+        .exceptionHandling(exceptions -> exceptions
+            .authenticationEntryPoint((request, response, exception) -> {
+              response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+              response.setHeader("WWW-Authenticate", "Bearer");
+              response.setContentType("application/json");
+              response.setCharacterEncoding("UTF-8");
+              response.getWriter().write(
+                  "{\"message\":\"É necessário estar autenticado para acessar este recurso.\"}"
+              );
+            })
+            .accessDeniedHandler((request, response, exception) -> {
+              response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+              response.setContentType("application/json");
+              response.setCharacterEncoding("UTF-8");
+
+              response.getWriter().write(
+                  "{\"message\":\"Você não possui permissão para acessar este recurso.\"}"
+              );
+            })
+        )
+        .addFilterBefore(
+            securityFilter,
+            UsernamePasswordAuthenticationFilter.class
         );
 
     return http.build();
