@@ -8,7 +8,7 @@ public record LoginRequestDto(
     @Email(message = "Insira um email válido!")
     String email,
     @NotBlank(message = "A senha não pode estar em branco!")
-    String passwor
+    String password
 ) {
 
 }

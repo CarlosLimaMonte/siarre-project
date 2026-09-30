@@ -11,17 +11,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements UserDetailsService {
 
   private final UserRepository userRepository;
-  private final BCryptPasswordEncoder bcryptPasswordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
-  public UserService(UserRepository userRepository, BCryptPasswordEncoder bcryptPasswordEncoder) {
+  public UserService(UserRepository userRepository,
+      PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
-    this.bcryptPasswordEncoder = bcryptPasswordEncoder;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
@@ -39,7 +41,7 @@ public class UserService implements UserDetailsService {
       throw new UserAlreadyRegistered();
     }
 
-    String password = bcryptPasswordEncoder.encode(createUserDto.password());
+    String password = passwordEncoder.encode(createUserDto.password());
 
     return UserDto.fromEntity(userRepository.save(createUserDto.toEntity(password)));
   }

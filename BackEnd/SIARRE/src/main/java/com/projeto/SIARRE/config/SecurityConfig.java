@@ -58,7 +58,7 @@ public class SecurityConfig {
         .requestCache(AbstractHttpConfigurer::disable)
         .authenticationProvider(authenticationProvider)
         .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers("/auth/**")
+            .requestMatchers("/auth/login", "/auth/register")
               .permitAll()
             .requestMatchers(HttpMethod.POST, "/question", "/question/**")
               .hasAnyRole("GERENTE", "OPERADOR")
