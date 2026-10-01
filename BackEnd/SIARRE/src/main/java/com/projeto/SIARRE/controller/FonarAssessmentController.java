@@ -7,6 +7,9 @@ import com.projeto.SIARRE.entity.dto.FonarAssessmentDto;
 import com.projeto.SIARRE.service.FonarAssessmentService;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,10 +43,13 @@ public class FonarAssessmentController {
   }
 
   // Read - All
+  // Need to change to return complete page
 
   @GetMapping
-  public List<FonarAssessmentDto> getAllFonarAssessment(){
-    return fonarAssessmentService.findAllFonarAssessment();
+  public List<FonarAssessmentDto> getAllFonarAssessment(
+      @PageableDefault(sort = "id", direction = Direction.ASC)Pageable pageable
+  ){
+    return fonarAssessmentService.findAllFonarAssessment(pageable).getContent();
   }
 
   // Read - by Id

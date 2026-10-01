@@ -6,6 +6,9 @@ import com.projeto.SIARRE.entity.dto.VictimResponseDto;
 import com.projeto.SIARRE.service.VictimService;
 import java.util.List;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,10 +41,10 @@ public class VictimController {
   }
 
   // Read - All
-
+  // Change after to return Page complete
   @GetMapping("/all")
-  public List<VictimResponseDto> getAllVictims(){
-    return victimService.findAllVictims();
+  public List<VictimResponseDto> getAllVictims(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Direction.ASC) Pageable pageable){
+    return victimService.findAllVictims(pageable).getContent();
   }
 
   // Read - By Id

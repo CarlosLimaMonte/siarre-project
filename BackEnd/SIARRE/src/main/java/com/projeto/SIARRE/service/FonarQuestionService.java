@@ -8,6 +8,8 @@ import com.projeto.SIARRE.exception.FonarQuestionNotFoundException;
 import com.projeto.SIARRE.repository.FonarOptionRepository;
 import com.projeto.SIARRE.repository.FonarQuestionRepository;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -57,8 +59,10 @@ public class FonarQuestionService {
 
   // Read - Find all
 
-  public List<FonarQuestionDto> findAllFonarQuestion(){
-    return fonarQuestionRepository.findAll().stream().map(FonarQuestionDto :: fromEntity).toList();
+  public Page<FonarQuestionDto> findAllFonarQuestion(Pageable pageable){
+
+    return fonarQuestionRepository.findAll(pageable).map(FonarQuestionDto :: fromEntity);
+
   }
 
   // Read - Find By Id

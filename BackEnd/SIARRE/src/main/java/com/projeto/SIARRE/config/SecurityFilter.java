@@ -8,7 +8,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -44,7 +43,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     String email = tokenService.validateToken(token);
 
     if (email == null || email.isBlank()) {
-      unauthroized(response);
+      unauthorized(response);
       return;
     }
 
@@ -67,7 +66,7 @@ public class SecurityFilter extends OncePerRequestFilter {
       SecurityContextHolder.setContext(context);
 
     } catch (AuthenticationException exception) {
-      unauthroized(response);
+      unauthorized(response);
       return;
     }
 
@@ -87,7 +86,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
   }
 
-  private void unauthroized(HttpServletResponse response) throws IOException {
+  private void unauthorized(HttpServletResponse response) throws IOException {
 
     SecurityContextHolder.clearContext();
 
@@ -97,7 +96,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     response.setCharacterEncoding("UTF-8");
 
     response.getWriter().write(
-        "{\"message:\": \"Autenticação inválida ou expirada.\"}"
+        "{\"message\":\"Autenticação inválida ou expirada.\"}"
     );
 
   }

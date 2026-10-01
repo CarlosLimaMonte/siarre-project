@@ -7,6 +7,8 @@ import com.projeto.SIARRE.exception.CpfAlreadyRegisteredException;
 import com.projeto.SIARRE.exception.VictimNotFoundException;
 import com.projeto.SIARRE.repository.VictimRepository;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,10 +31,11 @@ public class VictimService {
 
   }
 
-  // Read - Find all
+  // Read - Find all Pageable
 
-  public List<VictimResponseDto> findAllVictims(){
-    return victimRepository.findAll().stream().map(VictimResponseDto :: fromEntity).toList();
+  public Page<VictimResponseDto> findAllVictims(Pageable pageable){
+    Page<Victim> victimPage = victimRepository.findAll(pageable);
+    return victimPage.map(VictimResponseDto::fromEntity);
   }
 
   // Read - FindById

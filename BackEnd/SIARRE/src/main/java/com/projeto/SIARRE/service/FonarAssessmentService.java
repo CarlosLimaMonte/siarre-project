@@ -18,6 +18,8 @@ import com.projeto.SIARRE.repository.AggressorRepository;
 import com.projeto.SIARRE.repository.FonarAssessmentRepository;
 import com.projeto.SIARRE.repository.VictimRepository;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -55,10 +57,10 @@ public class FonarAssessmentService {
 
   // Read - All
 
-  public List<FonarAssessmentDto> findAllFonarAssessment(){
-    return fonarAssessmentRepository.findAll().stream().map(
-        FonarAssessmentDto :: fromEntity
-    ).toList();
+  public Page<FonarAssessmentDto> findAllFonarAssessment(Pageable pageable){
+
+    return fonarAssessmentRepository.findAll(pageable).map(FonarAssessmentDto :: fromEntity);
+
   }
 
   // Read - Find by Id

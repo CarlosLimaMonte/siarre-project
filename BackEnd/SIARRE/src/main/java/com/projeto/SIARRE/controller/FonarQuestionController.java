@@ -6,6 +6,9 @@ import com.projeto.SIARRE.entity.dto.FonarQuestionDto;
 import com.projeto.SIARRE.service.FonarQuestionService;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,10 +42,13 @@ public class FonarQuestionController {
   }
 
   // Read - All
+  // Need to change to return complete page
 
   @GetMapping
-  public List<FonarQuestionDto> getAllFonarQuestion(){
-    return fonarQuestionService.findAllFonarQuestion();
+  public List<FonarQuestionDto> getAllFonarQuestion(
+      @PageableDefault(size = 5,sort = "id", direction = Direction.ASC) Pageable pageable
+  ){
+    return fonarQuestionService.findAllFonarQuestion(pageable).getContent();
   }
 
   // Read - By Id

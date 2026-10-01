@@ -6,6 +6,8 @@ import com.projeto.SIARRE.entity.dto.AggressorResponseDto;
 import com.projeto.SIARRE.exception.AggressorNotFoundException;
 import com.projeto.SIARRE.repository.AggressorRepository;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,10 +26,10 @@ public class AggressorService {
 
   }
 
-  // Read - Find all
+  // Read - Find all Pageable
 
-  public List<AggressorResponseDto> findAllAggressor(){
-    return aggressorRepository.findAll().stream().map(AggressorResponseDto :: fromEntity).toList();
+  public Page<AggressorResponseDto> findAllAggressor(Pageable pageable){
+    return aggressorRepository.findAll(pageable).map(AggressorResponseDto :: fromEntity);
   }
 
   // Read - FindById
